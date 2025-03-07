@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>All Summarizations</h1>
+    
+    {% if summarizations %}
+    <ul class="summarization-list">
+        {% for summary in summarizations %}
+        <li>
+            <a href="{% url 'summary_detail' summary.id %}">
+                Summary #{{ summary.id }} - {{ summary.created_at|date:"M d, Y" }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No summarizations found.</p>
+    {% endif %}
+    
+    <a href="{% url 'summary_create' %}" class="btn">Create New Summary</a>
+</div>
+{% endblock %}

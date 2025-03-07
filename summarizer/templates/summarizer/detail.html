@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% block content%}
+
+<div class="container">
+        <h1>Summary Details</h1>
+
+        <p><strong>Original Text:</strong></p>
+        <div class="summary-box">{{ object.text }}</div>
+
+        <p><strong>Generated Summary:</strong></p>
+        <div class="summary-box">{{ object.summary }}</div>
+
+        <p><strong>Summary Length:</strong> {{ object.depth }}</p>
+<p><strong>Keywords:</strong> <span class="keywords">{{ object.keywords }}</span></p>-->
+
+        <a href="{% url 'summary_create' %}" class="btn">Generate Another Summary</a>
+        <a href="{% url 'summary_delete' object.id %}" class="btn">Delete</a>
+    </div>
+
+{% endblock content %}
