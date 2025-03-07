@@ -20,8 +20,8 @@ Make sure you have the following installed:
 ### Setup Steps
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/your-repository.git
-   cd your-repository
+   git clone https://github.com/AshrafJB2/AKAsummary
+   cd AKAsummary
    ```
 
 2. **Create and activate a virtual environment:**
