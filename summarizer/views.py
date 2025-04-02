@@ -28,9 +28,9 @@ class SignupView(CreateView):
 
 
 class SumListView(LoginRequiredMixin, ListView):
-    model = Summarization  # Use model instead of queryset for automatic template naming
-    template_name = 'summarizer/summarization_list.html'  # Explicit template path
-    context_object_name = 'summarizations'  # Recommended for clearer template context
+    model = Summarization
+    template_name = 'summarizer/summarization_list.html'
+    context_object_name = 'summarizations'
 
 
 class SumDetailView(LoginRequiredMixin, DetailView):
@@ -49,9 +49,9 @@ class SumCreateView(LoginRequiredMixin, CreateView):
 
         sum_res = summary(instance.text, instance.depth)[0]["summary_text"]
 
-        instance.user = self.request.user  # Assign the logged-in user
-        instance.title = "Generated Summary"  # Placeholder title
-        instance.summary = sum_res  # Generate summary
+        instance.user = self.request.user
+        instance.title =  summary(sum_res, 0)[0]["summary_text"]
+        instance.summary = sum_res
         instance.keywords = keywords(sum_res)
 
         instance.save()

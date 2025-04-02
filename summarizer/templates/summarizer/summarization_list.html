@@ -1,23 +1,138 @@
 {% extends "base.html" %}
 
+{% block title %} AKAsummary - All Summarizations {% endblock title %}
+
+      {% block extra_style %}
+/* Summarizations Page Specific Styles */
+.summarizations-page .hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.summarizations-page .hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.summarizations-page .hero p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.summarizations-page .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.summarizations-page .summarization-list {
+  list-style: none;
+  padding: 0;
+}
+
+.summarizations-page .summarization-item {
+  background-color: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.summarizations-page .summarization-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.summarizations-page .summarization-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+
+.summarizations-page .summarization-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.summarizations-page .summarization-id {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.summarizations-page .summarization-date {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.summarizations-page .summarization-link i {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.summarizations-page .no-summarizations {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin: 2rem 0;
+}
+
+.summarizations-page .create-summary {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.summarizations-page .btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.summarizations-page .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+      {% endblock %}
+
 {% block content %}
-<div class="container">
-    <h1>All Summarizations</h1>
-    
-    {% if summarizations %}
-    <ul class="summarization-list">
-        {% for summary in summarizations %}
-        <li>
-            <a href="{% url 'summary_detail' summary.id %}">
-                Summary #{{ summary.id }} - {{ summary.created_at|date:"M d, Y" }}
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No summarizations found.</p>
-    {% endif %}
-    
-    <a href="{% url 'summary_create' %}" class="btn">Create New Summary</a>
-</div>
-{% endblock %}
+  <div class="summarizations-page"> <!-- Add a wrapper class for the summarizations page -->
+    <section class="hero">
+      <h1>Toutes vos synthèses</h1>
+      <p>Retrouvez ici toutes les synthèses que vous avez créées.</p>
+    </section>
+
+    <div class="container">
+      {% if summarizations %}
+        <ul class="summarization-list">
+          {% for summary in summarizations %}
+            <li class="summarization-item">
+              <a href="{% url 'summary_detail' summary.id %}" class="summarization-link">
+                <div class="summarization-info">
+                  <span class="summarization-id">{{ summary.title }}</span>
+                  <span class="summarization-date">{{ summary.created_at|date:"M d, Y" }}</span>
+                </div>
+                <i class="fas fa-chevron-right"></i>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="no-summarizations">Aucune synthèse trouvée.</p>
+      {% endif %}
+
+      <div class="create-summary">
+        <a href="{% url 'summary_create' %}" class="btn btn-primary">Créer une nouvelle synthèse</a>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -5,6 +5,7 @@ from nltk.corpus import stopwords
 
 
 length_settings = {
+        0: (5, 10),
         1: (30, 60),
         2: (80, 150),
         3: (200, 300)

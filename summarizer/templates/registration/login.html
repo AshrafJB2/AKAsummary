@@ -1,10 +1,136 @@
 {% extends "base.html" %}
 
-{% block title %} AKAsummary - login {% endblock title%}
+{% block title %} AKAsummary - Login {% endblock title %}
+{%block extra_style%}
+    .hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.auth-form {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.form-container {
+  background-color: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-container h2 {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--bg-white);
+}
+
+.form-group input:focus {
+  border-color: var(--primary-light);
+  outline: none;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-light);
+}
+
+.form-footer a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.form-footer a:hover {
+  color: var(--primary-light);
+}
+
+
+
+{% endblock %}
+
 {% block content %}
-    <form method="post">
+  <section class="hero">
+    <h1>Connectez-vous à AKAsummary</h1>
+    <p>Accédez à votre compte pour générer des résumés intelligents en quelques secondes.</p>
+  </section>
+
+  <section class="auth-form">
+    <div class="form-container">
+      <h2>Connexion</h2>
+      <form method="post">
         {% csrf_token %}
-        {{ form }}
-        <button type="submit">Login</button>
-    </form>
+        <div class="form-group">
+          <label >Nom d'utilisateur</label>
+          {{ form.username }}
+        </div>
+        <div class="form-group">
+          <label >Mot de passe</label>
+          {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </form>
+      <div class="form-footer">
+        <p>Vous n'avez pas de compte? <a href="{% url 'signup' %}">Inscrivez-vous ici</a></p>
+      </div>
+    </div>
+  </section>
 {% endblock content %}

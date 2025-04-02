@@ -1,20 +1,135 @@
-{% extends "base.html"%}
-{% block content%}
+{% extends "base.html" %}
 
-<div class="container">
-        <h1>Summary Details</h1>
+{% block title %} AKAsummary - Summary Details {% endblock title %}
 
-        <p><strong>Original Text:</strong></p>
+      {% block extra_style %}
+        /* Summary Details Page Specific Styles */
+.summary-details-page .hero {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.summary-details-page .hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.summary-details-page .hero p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.summary-details-page .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.summary-details-page .summary-section {
+  margin-bottom: 2rem;
+}
+
+.summary-details-page .summary-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.summary-details-page .summary-box {
+  background-color: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.summary-details-page .summary-info {
+  margin-bottom: 2rem;
+}
+
+.summary-details-page .summary-info p {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.summary-details-page .summary-info .keywords {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.summary-details-page .actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.summary-details-page .btn {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  text-align: center;
+}
+
+.summary-details-page .btn-primary {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+}
+
+.summary-details-page .btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.summary-details-page .btn-danger {
+  background-color: var(--danger);
+  color: white;
+  border: none;
+}
+
+.summary-details-page .btn-danger:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+      {% endblock %}
+
+{% block content %}
+  <div class="summary-details-page"> <!-- Add a wrapper class for the summary details page -->
+    <section class="hero">
+      <h1>Détails de la synthèse</h1>
+      <p>Retrouvez ici les détails de votre synthèse générée.</p>
+    </section>
+
+    <div class="container">
+      <div class="summary-section">
+        <h2>Texte original</h2>
         <div class="summary-box">{{ object.text }}</div>
+      </div>
 
-        <p><strong>Generated Summary:</strong></p>
+      <div class="summary-section">
+        <h2>Synthèse générée</h2>
         <div class="summary-box">{{ object.summary }}</div>
+      </div>
 
-        <p><strong>Summary Length:</strong> {{ object.depth }}</p>
-<p><strong>Keywords:</strong> <span class="keywords">{{ object.keywords }}</span></p>-->
+      <div class="summary-info">
+        <p><strong>Longueur de la synthèse:</strong> {{ object.depth }}</p>
+        <p><strong>Mots-clés:</strong> <span class="keywords">{{ object.keywords }}</span></p>
+      </div>
 
-        <a href="{% url 'summary_create' %}" class="btn">Generate Another Summary</a>
-        <a href="{% url 'summary_delete' object.id %}" class="btn">Delete</a>
+      <div class="actions">
+        <a href="{% url 'summary_create' %}" class="btn btn-primary">Générer une autre synthèse</a>
+        <a href="{% url 'summary_delete' object.id %}" class="btn btn-danger">Supprimer</a>
+      </div>
     </div>
-
+  </div>
 {% endblock content %}
